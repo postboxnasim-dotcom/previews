@@ -1,0 +1,33 @@
+name: Fetch page assets
+# Downloads the files listed in any <page>/assets/sources.txt ("filename URL" per line)
+# into that same assets folder, so pages load their main photo and fonts from this site.
+on:
+  push:
+    paths: ['**/assets/sources.txt']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download listed files
+        run: |
+          set -e
+          for list in $(find . -path '*/assets/sources.txt' -not -path './.git/*'); do
+            dir=$(dirname "$list")
+            while read -r name url; do
+              [ -z "$name" ] && continue
+              case "$name" in \#*) continue;; esac
+              echo "→ $dir/$name"
+              curl -fsSL --retry 3 "$url" -o "$dir/$name"
+            done < "$list"
+          done
+      - name: Commit
+        run: |
+          git config user.name "searchvero-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Fetch page assets"
+          git push
