@@ -593,6 +593,15 @@ body{margin:0;background:var(--page,#fff)}
 .lv .tb-map-round:hover{background:#a93604!important;color:#fff!important;border-color:#ff9b60!important}
 .lv .tb-map-round:focus-visible{outline:3px solid #fb631c;outline-offset:3px}
 .lv .tb-mtip{color:#17212a;background:#fff}
+
+/* Cool volcanic rock becomes molten once the calendar is ready. */
+.lv .tb-cta[data-tb-book][aria-disabled="true"]{background:linear-gradient(145deg,#303236,#1c1d20 65%,#26272a)!important;border-color:#62646a!important;box-shadow:inset 0 1px 0 #ffffff16,0 3px 12px #0004!important;color:#e9e9ec!important}
+.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{background:radial-gradient(circle at 35% 30%,#b9bcc2 0%,#737780 30%,#363940 64%,#202226 90%);box-shadow:inset -2px -2px 3px #0008,0 0 5px #b4b7c22e;animation:lava-rock-breathe 2.6s ease-in-out infinite alternate}
+.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{background:linear-gradient(110deg,transparent 20%,#c9cdd215 50%,transparent 75%);opacity:.55}
+.lv .tb-cta[data-tb-book].lava-ready{animation:lava-rock-to-molten 1.1s ease-out 1}
+@keyframes lava-rock-breathe{from{transform:scale(.92);opacity:.65}to{transform:scale(1.04);opacity:1}}
+@keyframes lava-rock-to-molten{0%{background-color:#26272a;filter:saturate(0);box-shadow:0 0 0 #fb631c00}55%{filter:saturate(1.2);box-shadow:0 0 26px #fb631c99,inset 0 1px 0 #ffcf9780}100%{filter:saturate(1);box-shadow:0 0 18px #fb631c50,inset 0 1px 0 #ffb47a80}}
+@media(prefers-reduced-motion:reduce){.lv .tb-cta[data-tb-book].lava-ready,.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{animation:none;transform:none;opacity:1}}
 </style>
 </head><body>
 <div class="tb-page cl lv" id="tb-top">
@@ -892,7 +901,7 @@ body.tb-bk-lock{overflow:hidden}
 </div>
 <script>(function(){var bk=document.querySelector('[data-tb-bk]');if(!bk)return;var pg=document.querySelector('.tb-page');if(pg&&bk.parentNode!==pg)pg.appendChild(bk);
 bk.inert=!bk.classList.contains('open');var host=bk.querySelector('.tb-bk-host'),msg=bk.querySelector('.tb-bk-msg'),ready=false,last=null,y=0;
-var gated=bk.hasAttribute('data-ready-gate');var pend=null;function setReady(){if(ready)return;ready=true;bk.classList.add('ready');document.querySelectorAll('[data-tb-book]').forEach(function(b){b.classList.remove('tb-wait');b.removeAttribute('aria-disabled');b.removeAttribute('aria-busy');b.removeAttribute('tabindex');if(b.hasAttribute('data-ready-label'))b.textContent=b.getAttribute('data-ready-label')});if(pend){var b=pend;pend=null;b.classList.remove('tb-loading');b.removeAttribute('aria-busy');open(null,true)}}
+var gated=bk.hasAttribute('data-ready-gate');var pend=null;function setReady(){if(ready)return;ready=true;bk.classList.add('ready');document.querySelectorAll('[data-tb-book]').forEach(function(b){b.classList.remove('tb-wait');b.removeAttribute('aria-disabled');b.removeAttribute('aria-busy');b.removeAttribute('tabindex');if(b.hasAttribute('data-ready-label'))b.textContent=b.getAttribute('data-ready-label');if(gated&&b.classList.contains('tb-cta')){b.classList.add('lava-ready');setTimeout(function(){b.classList.remove('lava-ready')},1200)}});if(pend){var b=pend;pend=null;b.classList.remove('tb-loading');b.removeAttribute('aria-busy');open(null,true)}}
 function loaded(){var done=false,settle=null,lastHeight=0;function fin(){if(done)return;done=true;clearTimeout(settle);removeEventListener('message',onMsg);setReady()}function onMsg(e){var f=host.querySelector('iframe');if(!f||e.source!==f.contentWindow)return;var origin;try{origin=new URL(e.origin).hostname}catch(_){return}if(origin!=='bokun.io'&&!origin.endsWith('.bokun.io'))return;if(!gated){setTimeout(fin,250);return}if(typeof e.data!=='string'||e.data.indexOf('[iFrameSizer]')!==0)return;var fields=e.data.slice(13).split(':');if(fields[0]!==f.id)return;var height=Number(fields[1]),kind=fields[3];if(!['init','resize','mutationObserver','size','reset','resetPage','resizeParent','interval'].includes(kind))return;bk.setAttribute('data-calendar-height',String(height));if(height<1000){clearTimeout(settle);settle=null;lastHeight=0;return}if(height===lastHeight&&settle)return;lastHeight=height;clearTimeout(settle);settle=setTimeout(function(){bk.setAttribute('data-ready-evidence','calendar-size-stable');fin()},1600)}addEventListener('message',onMsg);if(!gated)setTimeout(fin,1200)}
 function bind(f){if(f.dataset.tbb)return;f.dataset.tbb=1;if(gated)loaded();else f.addEventListener('load',loaded,{once:true})}
 new MutationObserver(function(){host.querySelectorAll('iframe').forEach(bind)}).observe(host,{childList:true,subtree:true});
