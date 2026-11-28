@@ -579,6 +579,13 @@ body{margin:0;background:var(--page,#fff)}
 @media(prefers-reduced-motion:reduce){.lv .tb-cta{transition:none}.lv .tb-cta::before,.lv .tb-cta::after{animation:none;display:none}}
 
 .lv [data-tb-book][aria-disabled="true"]{cursor:progress;opacity:.6}.lv [data-tb-book][aria-disabled="true"]::before,.lv [data-tb-book][aria-disabled="true"]::after{animation:none;display:none}
+
+/* Indeterminate lava stream while availability warms in the background. */
+.lv .tb-cta[data-tb-book][aria-disabled="true"]{opacity:1;cursor:progress;background:linear-gradient(145deg,#642305,#411309);border-color:#a44517;box-shadow:0 0 14px #f2641833;color:#fff!important}
+.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{display:block;content:"";position:absolute;inset:auto 9px 4px;height:3px;border-radius:4px;background:#7c2d12;opacity:1;transform:none;animation:none;pointer-events:none}
+.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{display:block;content:"";position:absolute;inset:auto auto 4px -45%;width:45%;height:3px;border:0;border-radius:4px;background:linear-gradient(90deg,transparent,#f26a16 25%,#ffdc8a 60%,#ff8a26 85%,transparent);opacity:1;transform:translateX(0);animation:lava-loading-stream 1.8s ease-in-out infinite;pointer-events:none}
+@keyframes lava-loading-stream{to{transform:translateX(330%)}}
+@media(prefers-reduced-motion:reduce){.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{animation:none;left:9px;width:calc(100% - 18px);transform:none}}
 </style>
 </head><body>
 <div class="tb-page cl lv" id="tb-top">
