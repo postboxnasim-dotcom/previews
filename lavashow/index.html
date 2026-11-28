@@ -580,12 +580,13 @@ body{margin:0;background:var(--page,#fff)}
 
 .lv [data-tb-book][aria-disabled="true"]{cursor:progress;opacity:.6}.lv [data-tb-book][aria-disabled="true"]::before,.lv [data-tb-book][aria-disabled="true"]::after{animation:none;display:none}
 
-/* Indeterminate lava stream while availability warms in the background. */
-.lv .tb-cta[data-tb-book][aria-disabled="true"]{opacity:1;cursor:progress;background:linear-gradient(145deg,#642305,#411309);border-color:#a44517;box-shadow:0 0 14px #f2641833;color:#fff!important}
-.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{display:block;content:"";position:absolute;inset:auto 9px 4px;height:3px;border-radius:4px;background:#7c2d12;opacity:1;transform:none;animation:none;pointer-events:none}
-.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{display:block;content:"";position:absolute;inset:auto auto 4px -45%;width:45%;height:3px;border:0;border-radius:4px;background:linear-gradient(90deg,transparent,#f26a16 25%,#ffdc8a 60%,#ff8a26 85%,transparent);opacity:1;transform:translateX(0);animation:lava-loading-stream 1.8s ease-in-out infinite;pointer-events:none}
-@keyframes lava-loading-stream{to{transform:translateX(330%)}}
-@media(prefers-reduced-motion:reduce){.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{animation:none;left:9px;width:calc(100% - 18px);transform:none}}
+/* Integrated molten-orb availability preparation. */
+.lv .tb-cta[data-tb-book][aria-disabled="true"]{display:flex;align-items:center;justify-content:center;gap:10px;opacity:1;cursor:progress;background:linear-gradient(145deg,#762603,#4d1609);border-color:#b9511d;box-shadow:0 0 18px #f2641829,inset 0 1px 0 #ffb47a30;color:#fff!important}
+.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{content:"";position:relative;inset:auto;flex:0 0 14px;width:14px;height:14px;border-radius:50%;display:block;background:radial-gradient(circle at 35% 30%,#fff0bf 0%,#ffc160 22%,#ff731b 49%,#9c2504 78%);box-shadow:0 0 9px #ff8128aa;opacity:1;transform:none;animation:lava-orb-breathe 2.4s ease-in-out infinite alternate;pointer-events:none}
+.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{content:"";position:absolute;inset:0;display:block;border:0;border-radius:inherit;width:auto;height:auto;background:radial-gradient(ellipse at 15% 95%,#ff9b4020,transparent 45%),linear-gradient(110deg,transparent 20%,#ffbd6920 50%,transparent 75%);transform:translateX(-100%);opacity:.65;animation:lava-preparing-embers 5s ease-in-out infinite;pointer-events:none}
+@keyframes lava-orb-breathe{from{transform:scale(.88);opacity:.75}to{transform:scale(1.07);opacity:1}}
+@keyframes lava-preparing-embers{0%,10%{transform:translateX(-100%)}90%,100%{transform:translateX(100%)}}
+@media(prefers-reduced-motion:reduce){.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{animation:none;transform:none;opacity:1}.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{animation:none;display:none}}
 </style>
 </head><body>
 <div class="tb-page cl lv" id="tb-top">
@@ -621,7 +622,7 @@ body{margin:0;background:var(--page,#fff)}
       <div class="cl-price"><b>ISK 6,590</b> <span>per adult</span></div>
       
       
-      <a href="#book" data-tb-book role="button" aria-haspopup="dialog" aria-disabled="true" aria-busy="true" tabindex="-1" class="tb-cta cl-cta" data-ready-label="Check availability">Loading availability…</a>
+      <a href="#book" data-tb-book role="button" aria-haspopup="dialog" aria-disabled="true" aria-busy="true" tabindex="-1" class="tb-cta cl-cta" data-ready-label="Check availability">Preparing availability…</a>
       <div class="cl-pol"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M9.5 12.5l2 2 3.5-4"/></svg><span><b>Free cancellation</b>Full refund until 24 hours before the show. Selected ticket terms apply.</span></div>
       
       <div class="tb-questions"><div class="tb-q-title">Have booking questions? <svg class="ic sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg></div><div class="tb-q-row"><a class="tb-q-link" href="tel:+3545530005"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><span>+3545530005</span></a></div></div>
@@ -668,7 +669,7 @@ The Reykjavík-only Premium experience lasts around 60 minutes and is for guests
       <div class="cl-price"><b>ISK 6,590</b> <span>per adult</span></div>
       
       
-      <a href="#book" data-tb-book role="button" aria-haspopup="dialog" aria-disabled="true" aria-busy="true" tabindex="-1" class="tb-cta cl-cta" data-ready-label="Check availability">Loading availability…</a>
+      <a href="#book" data-tb-book role="button" aria-haspopup="dialog" aria-disabled="true" aria-busy="true" tabindex="-1" class="tb-cta cl-cta" data-ready-label="Check availability">Preparing availability…</a>
       <div class="cl-pol"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M9.5 12.5l2 2 3.5-4"/></svg><span><b>Free cancellation</b>Full refund until 24 hours before the show. Selected ticket terms apply.</span></div>
       
       <div class="tb-questions"><div class="tb-q-title">Have booking questions? <svg class="ic sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg></div><div class="tb-q-row"><a class="tb-q-link" href="tel:+3545530005"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><span>+3545530005</span></a></div></div>
@@ -676,7 +677,7 @@ The Reykjavík-only Premium experience lasts around 60 minutes and is for guests
       
     </div></div></aside>
   </div>
-  <div class="cl-bar" data-cl-bar><div class="cl-bar-p"><small>From </small><b>ISK 6,590</b><span><svg class="ic sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M9.5 12.5l2 2 3.5-4"/></svg> Free cancellation</span></div><a href="#book" data-tb-book role="button" aria-haspopup="dialog" aria-disabled="true" aria-busy="true" tabindex="-1" class="tb-cta cl-cta cl-bar-cta" data-ready-label="Check availability">Loading availability…</a></div>
+  <div class="cl-bar" data-cl-bar><div class="cl-bar-p"><small>From </small><b>ISK 6,590</b><span><svg class="ic sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M9.5 12.5l2 2 3.5-4"/></svg> Free cancellation</span></div><a href="#book" data-tb-book role="button" aria-haspopup="dialog" aria-disabled="true" aria-busy="true" tabindex="-1" class="tb-cta cl-cta cl-bar-cta" data-ready-label="Check availability">Preparing availability…</a></div>
   <div class="tb-viewer" id="tb-viewer" hidden role="dialog" aria-modal="true" aria-label="Photo gallery">
     <div class="tb-v-top"><span class="tb-v-count"><b>1</b> / 6</span><span class="tb-v-title">Lava Show Reykjavík</span><button type="button" class="tb-v-close" data-tb-vclose aria-label="Close"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <div class="tb-v-stage">
