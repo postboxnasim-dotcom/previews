@@ -339,7 +339,7 @@ body{margin:0;background:var(--page,#fff)}
   .tb-mgal{display:block;position:relative;margin:0 -16px 8px;aspect-ratio:3/2;background:var(--soft)}
   .tb-mgal-track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
   .tb-mgal-track::-webkit-scrollbar{display:none}
-  .tb-mgal-slide{flex:0 0 100%;height:100%;scroll-snap-align:center}
+  .tb-mgal-slide{flex:0 0 100%;min-width:0;height:100%;scroll-snap-align:center}
   .tb-mgal-slide img{width:100%;height:100%;object-fit:cover;display:block}
   .tb-mgal-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%!important;background:rgba(255,255,255,.92)!important;color:#111!important;display:flex!important;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
   .tb-mgal-nav[hidden]{display:none!important}
@@ -618,8 +618,8 @@ body{margin:0;background:var(--page,#fff)}
 
 .lv .lava-review-carousel{position:relative}.lv .lava-review-carousel .tb-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.lv .lava-review-carousel .tb-track::-webkit-scrollbar{display:none}.lv .lava-review-carousel .lava-rv-card{flex:0 0 calc((100% - 16px)/2);scroll-snap-align:start;display:flex;flex-direction:column}.lv .lava-rv-preview .lava-rv-card p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;flex:1;margin-bottom:10px!important}.lv .lava-rv-read{font-size:14px;color:var(--ink);text-underline-offset:3px;align-self:flex-start}.lv .lava-review-carousel .tb-car-btn{background:#171719;color:#f7f7f7;border:1px solid #68686f;width:40px;height:40px;box-shadow:0 2px 8px #0008}.lv .lava-review-carousel .tb-car-btn[hidden]{display:none!important}.lv .lava-rv-full{margin-top:32px}.lv .lava-rv-full .lava-rv-card{scroll-margin-top:90px}.lv .lava-rv-full h2{margin-bottom:12px!important}.lv .lava-rv-full .lava-rv-summary{margin-top:12px}@media(max-width:600px){.lv .lava-review-carousel .lava-rv-card{flex-basis:86%}.lv .lava-rv-preview .lava-rv-head{flex-direction:row;align-items:center}}
 
-/* Reserve mobile heading geometry before font decode and rating layout. */
-@media(max-width:600px){.lv .cl-head h1{min-height:3.9em}.lv .cl-meta{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-height:58px;align-content:start}.lv .cl-rate{min-height:24px;white-space:nowrap;font-size:14px}.lv .cl-loc{min-height:24px}.lv .cl-head .rm-eyebrow{min-height:17px}.lv .cl-gal .tb-mgal{min-height:310px}}
+/* Keep phone geometry intrinsic: a 310px minimum plus 3:2 aspect ratio forced a 465px gallery. */
+@media(max-width:600px){.lv .cl-head h1{min-height:0}.lv .cl-meta{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-height:58px;align-content:start}.lv .cl-rate{min-height:24px;white-space:nowrap;font-size:14px}.lv .cl-loc{min-height:24px}.lv .cl-head .rm-eyebrow{min-height:17px}.lv .cl-gal .tb-mgal{width:100%;min-width:0;min-height:0}}
 .lv .cl-opt-n em.ok{color:#63d297}
 </style>
 </head><body>
@@ -892,7 +892,7 @@ var go=function(){['scroll','pointermove','touchstart','keydown'].forEach(functi
 .tb-bk-scroll{position:relative;flex:1;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .tb-bk-host.bokunWidget{min-height:760px;width:100%}
 .tb-bk-host iframe{display:block;width:100%!important;max-width:100%!important;border:0!important}
-.tb-bk-skel{position:absolute;inset:0;z-index:2;padding:22px 20px;background:var(--card,#fff);transition:opacity .35s ease}
+.tb-bk-skel{position:absolute;overflow:hidden;inset:0;z-index:2;padding:22px 20px;background:var(--card,#fff);transition:opacity .35s ease}
 .tb-bk.ready .tb-bk-skel{opacity:0;pointer-events:none}
 .tb-bk-skel i{display:block;border-radius:8px;background:linear-gradient(90deg,var(--soft,#f2f2f2) 25%,#fff 50%,var(--soft,#f2f2f2) 75%);background-size:300% 100%;animation:tbshim 1.3s linear infinite;margin-bottom:12px}
 .tb-bk-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:18px 0}
