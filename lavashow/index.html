@@ -587,6 +587,12 @@ body{margin:0;background:var(--page,#fff)}
 @keyframes lava-orb-breathe{from{transform:scale(.88);opacity:.75}to{transform:scale(1.07);opacity:1}}
 @keyframes lava-preparing-embers{0%,10%{transform:translateX(-100%)}90%,100%{transform:translateX(100%)}}
 @media(prefers-reduced-motion:reduce){.lv .tb-cta[data-tb-book][aria-disabled="true"]::before{animation:none;transform:none;opacity:1}.lv .tb-cta[data-tb-book][aria-disabled="true"]::after{animation:none;display:none}}
+
+/* Contrast-safe map controls on the light map tiles. */
+.lv .tb-map-round{width:44px;height:44px;background:#171717!important;color:#fff!important;border:1px solid #767676!important;font-family:Arial,sans-serif;font-size:23px;font-weight:700;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005}
+.lv .tb-map-round:hover{background:#a93604!important;color:#fff!important;border-color:#ff9b60!important}
+.lv .tb-map-round:focus-visible{outline:3px solid #fb631c;outline-offset:3px}
+.lv .tb-mtip{color:#17212a;background:#fff}
 </style>
 </head><body>
 <div class="tb-page cl lv" id="tb-top">
